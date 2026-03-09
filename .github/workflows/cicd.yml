@@ -48,4 +48,4 @@ jobs:
           script: |
             cd /home/ubuntu/project
             docker-compose pull
-            docker-compose up -d
+            docker-compose up
