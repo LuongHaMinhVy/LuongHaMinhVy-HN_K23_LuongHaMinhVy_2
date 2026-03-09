@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+
+  mysql:
+    image: mysql:8
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: projectecommerce
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - rikkei_network
+
+  backend:
+    image: luonghaminhvy/spring-backend:latest
+    container_name: spring_backend
+    depends_on:
+      - mysql
+    networks:
+      - rikkei_network
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_server
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - backend
+    networks:
+      - rikkei_network
+
+volumes:
+  mysql_data:
+
+networks:
+  rikkei_network:
