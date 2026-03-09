@@ -15,7 +15,7 @@ services:
       - rikkei_network
 
   backend:
-    image: luonghaminhvy/spring-backend:latest
+    image: calaimon/spring-backend:latest
     container_name: spring_backend
     depends_on:
       - mysql
